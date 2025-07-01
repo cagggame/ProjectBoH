@@ -4,6 +4,7 @@
 #include "BohButtonBase.h"
 
 #include "CommonActionWidget.h"
+#include "CommonLazyImage.h"
 
 void UBohButtonBase::SetButtonText(const FText& InText)
 {
@@ -18,6 +19,7 @@ void UBohButtonBase::NativePreConstruct()
 
 	UpdateButtonStyle();
 	RefreshButtonText();
+	RefreshButtonIcon();
 }
 
 void UBohButtonBase::UpdateInputActionWidget()
@@ -26,6 +28,7 @@ void UBohButtonBase::UpdateInputActionWidget()
 
 	UpdateButtonStyle();
 	RefreshButtonText();
+	RefreshButtonIcon();
 }
 
 void UBohButtonBase::OnInputMethodChanged(ECommonInputType CurrentInputType)
@@ -50,4 +53,12 @@ void UBohButtonBase::RefreshButtonText()
 	}
 
 	UpdateButtonText(ButtonText);
+}
+
+void UBohButtonBase::RefreshButtonIcon()
+{
+	if (bEnableIcon && LazyImage_Icon)
+	{
+		LazyImage_Icon->SetBrush(IconBrush);
+	}
 }

@@ -19,6 +19,8 @@ public class ProjectBoH : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{
+			"Slate",
+			"SlateCore",
 			"UMG",
 			"CommonGame",
 		});

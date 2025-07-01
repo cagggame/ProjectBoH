@@ -6,6 +6,7 @@
 #include "CommonButtonBase.h"
 #include "BohButtonBase.generated.h"
 
+class UCommonLazyImage;
 /**
  * 
  */
@@ -30,6 +31,8 @@ protected:
 
 	void RefreshButtonText();
 
+	void RefreshButtonIcon();
+
 	UFUNCTION(BlueprintImplementableEvent)
 	void UpdateButtonText(const FText& InText);
 
@@ -42,4 +45,13 @@ private:
 
 	UPROPERTY(EditAnywhere, Category="Button", meta=(EditCondition="bOverride_ButtonText"))
 	FText ButtonText;
+
+	UPROPERTY(EditAnywhere, Category="Button", meta=(InlineEditConditionToggle))
+	uint8 bEnableIcon : 1;
+
+	UPROPERTY(EditAnywhere, Category="Button", meta=(EditCondition="bEnableIcon"))
+	FSlateBrush IconBrush;
+
+	UPROPERTY(meta=(BindWidgetOptional))
+	TObjectPtr<UCommonLazyImage> LazyImage_Icon;
 };
