@@ -3,6 +3,8 @@
 
 #include "SubtitleDisplaySubsystem.h"
 
+#include UE_INLINE_GENERATED_CPP_BY_NAME(SubtitleDisplaySubsystem)
+
 USubtitleDisplaySubsystem* USubtitleDisplaySubsystem::Get(const ULocalPlayer* LocalPlayer)
 {
 	return LocalPlayer ? LocalPlayer->GetGameInstance()->GetSubsystem<USubtitleDisplaySubsystem>() : nullptr;

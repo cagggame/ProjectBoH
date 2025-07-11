@@ -8,6 +8,12 @@
 
 #define LOCTEXT_NAMESPACE "SubtitleDisplay"
 
+USubtitleDisplay::USubtitleDisplay(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
+	, WrapTextAt(0) // No wrapping by default
+{
+}
+
 void USubtitleDisplay::SynchronizeProperties()
 {
 	Super::SynchronizeProperties();
