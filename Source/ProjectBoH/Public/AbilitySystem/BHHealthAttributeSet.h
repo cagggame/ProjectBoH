@@ -13,5 +13,21 @@ UCLASS()
 class PROJECTBOH_API UBHHealthAttributeSet : public UBHAttributeSet
 {
 	GENERATED_BODY()
-	
+
+public:
+	UBHHealthAttributeSet();
+
+protected:
+	UFUNCTION()
+	void OnRep_Health(const FGameplayAttributeData& OldValue);
+
+	UFUNCTION()
+	void OnRep_MaxHealth(const FGameplayAttributeData& OldValue);
+
+private:
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_Health, meta=(AllowPrivateAccess=true))
+	FGameplayAttributeData Health;
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_MaxHealth, meta=(AllowPrivateAccess=true))
+	FGameplayAttributeData MaxHealth;
 };
