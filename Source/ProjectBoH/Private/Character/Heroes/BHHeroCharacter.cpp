@@ -4,7 +4,7 @@
 #include "Character/Heroes/BHHeroCharacter.h"
 
 #include "AbilitySystem/BHAbilitySystemComponent.h"
-#include "AbilitySystem/BHAttributeSet.h"
+#include "AbilitySystem/BHBaseAttributeSet.h"
 #include "Player/BHPlayerState.h"
 
 void ABHHeroCharacter::PossessedBy(AController* NewController)
@@ -17,7 +17,7 @@ void ABHHeroCharacter::PossessedBy(AController* NewController)
 		AbilitySystemComponent = Cast<UBHAbilitySystemComponent>(PS->GetAbilitySystemComponent());
 		PS->GetAbilitySystemComponent()->InitAbilityActorInfo(PS, this);
 		
-		AttributeSet = PS->GetAttributeSet();
+		BaseAttributeSet = PS->GetBaseAttributeSet();
 	}
 }
 
@@ -31,6 +31,6 @@ void ABHHeroCharacter::OnRep_PlayerState()
 		AbilitySystemComponent = Cast<UBHAbilitySystemComponent>(PS->GetAbilitySystemComponent());
 		PS->GetAbilitySystemComponent()->InitAbilityActorInfo(PS, this);
 		
-		AttributeSet = PS->GetAttributeSet();
+		BaseAttributeSet = PS->GetBaseAttributeSet();
 	}
 }

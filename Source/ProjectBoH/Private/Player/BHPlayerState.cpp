@@ -4,7 +4,7 @@
 #include "Player/BHPlayerState.h"
 
 #include "AbilitySystem/BHAbilitySystemComponent.h"
-#include "AbilitySystem/BHAttributeSet.h"
+#include "AbilitySystem/BHBaseAttributeSet.h"
 
 ABHPlayerState::ABHPlayerState(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -13,7 +13,7 @@ ABHPlayerState::ABHPlayerState(const FObjectInitializer& ObjectInitializer)
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
 
-	AttributeSet = CreateDefaultSubobject<UBHAttributeSet>(TEXT("AttributeSet"));
+	BaseAttributeSet = CreateDefaultSubobject<UBHBaseAttributeSet>(TEXT("BaseAttributeSet"));
 
 	SetNetUpdateFrequency(100.f);
 }
@@ -23,7 +23,7 @@ UAbilitySystemComponent* ABHPlayerState::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
-UBHAttributeSet* ABHPlayerState::GetAttributeSet() const
+UBHBaseAttributeSet* ABHPlayerState::GetBaseAttributeSet() const
 {
-	return AttributeSet;
+	return BaseAttributeSet;
 }

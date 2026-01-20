@@ -28,5 +28,5 @@ public:
 
 protected:
 	TWeakObjectPtr<class UBHAbilitySystemComponent> AbilitySystemComponent;
-	TWeakObjectPtr<class UBHAttributeSet> AttributeSet;
+	TWeakObjectPtr<class UBHBaseAttributeSet> BaseAttributeSet;
 };

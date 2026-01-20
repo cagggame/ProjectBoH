@@ -6,6 +6,7 @@
 #include "Character/BHCharacter.h"
 #include "BHHeroCharacter.generated.h"
 
+class UBHBaseAttributeSet;
 /**
  * 
  */
@@ -18,4 +19,7 @@ public:
 	virtual void PossessedBy(AController* NewController) override;
 
 	virtual void OnRep_PlayerState() override;
+
+protected:
+	
 };

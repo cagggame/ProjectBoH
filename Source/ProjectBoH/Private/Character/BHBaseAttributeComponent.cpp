@@ -1,12 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Character/BHHealthComponent.h"
+#include "Character/BHBaseAttributeComponent.h"
 
 #include "AbilitySystem/BHAbilitySystemComponent.h"
-#include "AbilitySystem/BHHealthAttributeSet.h"
+#include "AbilitySystem/BHBaseAttributeSet.h"
 
-UBHHealthComponent::UBHHealthComponent(const FObjectInitializer& ObjectInitializer)
+UBHBaseAttributeComponent::UBHBaseAttributeComponent(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// Disable tick
@@ -16,7 +16,7 @@ UBHHealthComponent::UBHHealthComponent(const FObjectInitializer& ObjectInitializ
 	SetIsReplicatedByDefault(true);
 }
 
-void UBHHealthComponent::InitHealthComponent(UBHAbilitySystemComponent* InASC)
+void UBHBaseAttributeComponent::InitBaseAttributeComponent(UBHAbilitySystemComponent* InASC)
 {
 	if (AbilitySystemComponent.IsValid() or !InASC)
 	{
@@ -24,8 +24,8 @@ void UBHHealthComponent::InitHealthComponent(UBHAbilitySystemComponent* InASC)
 	}
 
 	AbilitySystemComponent = InASC;
-	HealthAttributeSet = InASC->GetSet<UBHHealthAttributeSet>();
-	if (!HealthAttributeSet.IsValid())
+	BaseAttributeSet = InASC->GetSet<UBHBaseAttributeSet>();
+	if (!BaseAttributeSet.IsValid())
 	{
 		return;
 	}

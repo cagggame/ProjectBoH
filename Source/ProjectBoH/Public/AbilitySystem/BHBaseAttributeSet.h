@@ -3,20 +3,26 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystemComponent.h"
 #include "AbilitySystem/BHAttributeSet.h"
-#include "BHHealthAttributeSet.generated.h"
+#include "BHBaseAttributeSet.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PROJECTBOH_API UBHHealthAttributeSet : public UBHAttributeSet
+class PROJECTBOH_API UBHBaseAttributeSet : public UBHAttributeSet
 {
 	GENERATED_BODY()
 
 public:
-	UBHHealthAttributeSet();
+	UBHBaseAttributeSet();
 
+	ATTRIBUTE_ACCESSORS(UBHBaseAttributeSet, Health);
+	ATTRIBUTE_ACCESSORS(UBHBaseAttributeSet, MaxHealth);
+	
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	
 protected:
 	UFUNCTION()
 	void OnRep_Health(const FGameplayAttributeData& OldValue);

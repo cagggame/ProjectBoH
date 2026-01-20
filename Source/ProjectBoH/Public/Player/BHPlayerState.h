@@ -7,7 +7,7 @@
 #include "GameFramework/PlayerState.h"
 #include "BHPlayerState.generated.h"
 
-class UBHAttributeSet;
+class UBHBaseAttributeSet;
 class UBHAbilitySystemComponent;
 /**
  * 
@@ -22,12 +22,12 @@ public:
 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
-	UBHAttributeSet* GetAttributeSet() const;
+	UBHBaseAttributeSet* GetBaseAttributeSet() const;
 
 private:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UBHAbilitySystemComponent> AbilitySystemComponent;
 	
 	UPROPERTY()
-	TObjectPtr<UBHAttributeSet> AttributeSet;
+	TObjectPtr<UBHBaseAttributeSet> BaseAttributeSet;
 };
