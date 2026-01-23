@@ -4,7 +4,7 @@
 #include "Player/BHPlayerState.h"
 
 #include "AbilitySystem/BHAbilitySystemComponent.h"
-#include "AbilitySystem/BHBaseAttributeSet.h"
+#include "AbilitySystem/Attributes/BHBaseAttributeSet.h"
 
 ABHPlayerState::ABHPlayerState(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)

@@ -4,7 +4,7 @@
 #include "Character/BHBaseAttributeComponent.h"
 
 #include "AbilitySystem/BHAbilitySystemComponent.h"
-#include "AbilitySystem/BHBaseAttributeSet.h"
+#include "AbilitySystem/Attributes/BHBaseAttributeSet.h"
 
 UBHBaseAttributeComponent::UBHBaseAttributeComponent(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)

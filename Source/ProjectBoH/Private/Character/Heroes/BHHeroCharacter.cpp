@@ -4,7 +4,7 @@
 #include "Character/Heroes/BHHeroCharacter.h"
 
 #include "AbilitySystem/BHAbilitySystemComponent.h"
-#include "AbilitySystem/BHBaseAttributeSet.h"
+#include "AbilitySystem/Attributes/BHBaseAttributeSet.h"
 #include "Player/BHPlayerState.h"
 
 void ABHHeroCharacter::PossessedBy(AController* NewController)
