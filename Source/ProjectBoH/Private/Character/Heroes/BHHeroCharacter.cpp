@@ -4,11 +4,14 @@
 #include "Character/Heroes/BHHeroCharacter.h"
 
 #include "EnhancedInputSubsystems.h"
+#include "EnhancedInputComponent.h"
 #include "AbilitySystem/BHAbilitySystemComponent.h"
 #include "AbilitySystem/Attributes/BHBaseAttributeSet.h"
 #include "Player/BHPlayerState.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Input/BHInputConfig.h"
+#include "GameplayTagContainer.h"
 
 ABHHeroCharacter::ABHHeroCharacter()
 {
@@ -35,6 +38,38 @@ void ABHHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = PC->GetLocalPlayer()->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>())
 		{
 			Subsystem->AddMappingContext(InputMappingContext, 0);
+		}
+	}
+
+	// Bind ability input actions
+	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		if (InputConfig)
+		{
+			// Bind all ability input actions
+			for (const FBHInputAction& Action : InputConfig->AbilityInputActions)
+			{
+				if (Action.InputAction && Action.InputTag.IsValid())
+				{
+					// Bind pressed event
+					EnhancedInputComponent->BindAction(
+						Action.InputAction,
+						ETriggerEvent::Triggered,
+						this,
+						&ABHHeroCharacter::Input_AbilityInputTagPressed,
+						Action.InputTag
+					);
+
+					// Bind released event
+					// EnhancedInputComponent->BindAction(
+					// 	Action.InputAction,
+					// 	ETriggerEvent::Completed,
+					// 	this,
+					// 	&ABHHeroCharacter::Input_AbilityInputTagReleased,
+					// 	Action.InputTag
+					// );
+				}
+			}
 		}
 	}
 }
@@ -98,4 +133,20 @@ void ABHHeroCharacter::IA_Look_Triggered(const FVector2D& InputActionValue)
 	{
 		AddControllerPitchInput(InputActionValue.Y);
 	}	
+}
+
+void ABHHeroCharacter::Input_AbilityInputTagPressed(FGameplayTag InputTag)
+{
+	if (AbilitySystemComponent.IsValid())
+	{
+		AbilitySystemComponent->AbilityInputTagPressed(InputTag);
+	}
+}
+
+void ABHHeroCharacter::Input_AbilityInputTagReleased(FGameplayTag InputTag)
+{
+	if (AbilitySystemComponent.IsValid())
+	{
+		AbilitySystemComponent->AbilityInputTagReleased(InputTag);
+	}
 }
