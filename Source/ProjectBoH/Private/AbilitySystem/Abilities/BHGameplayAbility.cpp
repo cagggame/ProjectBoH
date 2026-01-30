@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "AbilitySystem/BHGameplayAbility.h"
+#include "AbilitySystem/Abilities/BHGameplayAbility.h"
 
 #include "AbilitySystem/BHAbilitySystemComponent.h"
 #include "Character/BHCharacter.h"
@@ -8,6 +8,7 @@
 
 #include "GameFramework/Controller.h"
 #include "GameFramework/PlayerController.h"
+#include "Player/BHPlayerController.h"
 
 UBHGameplayAbility::UBHGameplayAbility(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -17,9 +18,10 @@ UBHGameplayAbility::UBHGameplayAbility(const FObjectInitializer& ObjectInitializ
 	ActivationGroup = EBHAbilityActivationGroup::Independent;
 }
 
-UBHAbilitySystemComponent* UBHGameplayAbility::GetBHASCFromActorInfo() const
+UBHAbilitySystemComponent* UBHGameplayAbility::GetBHAbilitySystemComponentFromActorInfo() const
 {
-	return Cast<UBHAbilitySystemComponent>(GetAbilitySystemComponentFromActorInfo());
+	const FGameplayAbilityActorInfo* ActorInfo = GetCurrentActorInfo();
+	return (ActorInfo ? Cast<UBHAbilitySystemComponent>(CurrentActorInfo->AbilitySystemComponent.Get()) : nullptr);
 }
 
 ABHCharacter* UBHGameplayAbility::GetBHCharacterFromActorInfo() const
@@ -32,6 +34,22 @@ ABHHeroCharacter* UBHGameplayAbility::GetBHHeroFromActorInfo() const
 {
 	const FGameplayAbilityActorInfo* ActorInfo = GetCurrentActorInfo();
 	return ActorInfo ? Cast<ABHHeroCharacter>(ActorInfo->AvatarActor.Get()) : nullptr;
+}
+
+ABHPlayerController* UBHGameplayAbility::GetBHPlayerControllerFromActorInfo() const
+{
+	const FGameplayAbilityActorInfo* ActorInfo = GetCurrentActorInfo();
+	if (!ActorInfo)
+	{
+		return nullptr;
+	}
+
+	if (AController* Controller = ActorInfo->PlayerController.Get())
+	{
+		return Cast<ABHPlayerController>(Controller);
+	}
+
+	return nullptr;
 }
 
 AController* UBHGameplayAbility::GetControllerFromActorInfo() const

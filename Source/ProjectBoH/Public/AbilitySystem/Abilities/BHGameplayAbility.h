@@ -10,6 +10,7 @@
 class UBHAbilitySystemComponent;
 class ABHCharacter;
 class ABHHeroCharacter;
+class ABHPlayerController;
 
 /**
  * EBHAbilityActivationPolicy
@@ -71,7 +72,7 @@ public:
 
 	/** Returns the BH ASC from the current actor info, if any. */
 	UFUNCTION(BlueprintCallable, Category = "BH|Ability")
-	UBHAbilitySystemComponent* GetBHASCFromActorInfo() const;
+	UBHAbilitySystemComponent* GetBHAbilitySystemComponentFromActorInfo() const;
 
 	/** Returns the BH base character from the current actor info, if any. */
 	UFUNCTION(BlueprintCallable, Category = "BH|Ability")
@@ -82,6 +83,9 @@ public:
 	ABHHeroCharacter* GetBHHeroFromActorInfo() const;
 
 	/** Returns the controller associated with this ability's avatar, if any. */
+	UFUNCTION(BlueprintCallable, Category = "BH|Ability")
+	ABHPlayerController* GetBHPlayerControllerFromActorInfo() const;
+
 	UFUNCTION(BlueprintCallable, Category = "BH|Ability")
 	AController* GetControllerFromActorInfo() const;
 
