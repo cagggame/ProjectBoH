@@ -37,9 +37,10 @@ void UBHAbility_PrimaryAttack::ActivateAbility(const FGameplayAbilitySpecHandle 
 	if (TimeNow - LastComboTime > ComboResetTime)
 	{
 		CurrentComboIndex = 0;
-	}
+	} 
 
 	CurrentComboIndex = (CurrentComboIndex % MaxComboCount) + 1;
+	UE_LOG(LogTemp, Warning, TEXT("CurrentComboIndex: %d"), CurrentComboIndex);
 	LastComboTime = TimeNow;
 	bWantsNextCombo = false;
 
@@ -72,7 +73,7 @@ void UBHAbility_PrimaryAttack::PlayNextComboSection()
 		EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, true);
 		return;
 	}
-
+	
 	UAnimMontage* Montage = Cast<UAnimMontage>(UKismetSystemLibrary::LoadAsset_Blocking(SoftAttackMontage));
 	const FName SectionName = GetSectionNameForIndex(CurrentComboIndex);
 

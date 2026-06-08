@@ -12,6 +12,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Input/BHInputConfig.h"
 #include "GameplayTagContainer.h"
+#include "AbilitySystem/Abilities/BHGameplayAbility.h"
 
 ABHHeroCharacter::ABHHeroCharacter()
 {
@@ -85,6 +86,14 @@ void ABHHeroCharacter::PossessedBy(AController* NewController)
 		PS->GetAbilitySystemComponent()->InitAbilityActorInfo(PS, this);
 		
 		BaseAttributeSet = PS->GetBaseAttributeSet();
+
+		for (const FBHCharacterAbilitySet& Entry : CharacterAbilitySet)
+		{
+			//UBHGameplayAbility* Ability = Entry.Ability->GetDefaultObject<UBHGameplayAbility>();
+			FGameplayAbilitySpec NewAbilitySpec(Entry.Ability);
+			NewAbilitySpec.GetDynamicSpecSourceTags().AddTag(Entry.InputTag);
+			AbilitySystemComponent->GiveAbility(NewAbilitySpec);
+		}
 	}
 }
 

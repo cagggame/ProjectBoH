@@ -3,8 +3,22 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "GameFramework/Character.h"
 #include "BHCharacter.generated.h"
+
+USTRUCT(BlueprintType)
+struct FBHCharacterAbilitySet
+{
+	GENERATED_BODY()
+	
+public:
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<class UBHGameplayAbility> Ability;
+
+	UPROPERTY(EditDefaultsOnly)
+	FGameplayTag InputTag;
+};
 
 UCLASS()
 class PROJECTBOH_API ABHCharacter : public ACharacter
@@ -29,4 +43,7 @@ public:
 protected:
 	TWeakObjectPtr<class UBHAbilitySystemComponent> AbilitySystemComponent;
 	TWeakObjectPtr<class UBHBaseAttributeSet> BaseAttributeSet;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Ability")
+	TArray<FBHCharacterAbilitySet> CharacterAbilitySet;
 };
